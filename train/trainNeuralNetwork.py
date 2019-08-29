@@ -7,8 +7,6 @@ import pickle
 
 N_CLASSES = np.unique([0 , 1])
 
-X = [[0., 0.], [1., 1.], [-1., 1.], [0., 0.]]
-y = [0, 1, 1, 1]
 model = MLPClassifier(solver='sgd', validation_fraction=0.15, alpha=1e-4, hidden_layer_sizes=(10, 10), random_state=1)
 
 x_train_file = open('../data/train/x', 'rb')
