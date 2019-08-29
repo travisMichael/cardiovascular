@@ -2,7 +2,6 @@
 # https://scikit-learn.org/stable/modules/neural_networks_supervised.html
 # https://scikit-learn.org/stable/auto_examples/neural_networks/plot_mlp_training_curves.html
 from sklearn.neural_network import MLPClassifier
-from sklearn.linear_model import LogisticRegression
 import numpy as np
 import pickle
 
