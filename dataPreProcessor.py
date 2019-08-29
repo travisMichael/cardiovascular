@@ -3,6 +3,11 @@ import pickle
 import numpy as np
 import os
 
+def normalize_gender_attribute(x):
+    if x == 1:
+        return 0.0
+    else:
+        return 1.0
 
 df = pd.read_csv("cardio_train.csv", delimiter=";")
 
@@ -18,6 +23,7 @@ df['height'] = df['height'].apply(lambda x: x / max_stats['height'])
 df['weight'] = df['weight'].apply(lambda x: x / max_stats['weight'])
 df['ap_hi'] = df['ap_hi'].apply(lambda x: x / max_stats['ap_hi'])
 df['ap_lo'] = df['ap_lo'].apply(lambda x: x / max_stats['ap_lo'])
+df['gender'] = df['gender'].apply(lambda x: normalize_gender_attribute(x))
 
 
 y = np.array(df.iloc[:,12])
