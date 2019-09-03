@@ -4,7 +4,8 @@ import pickle
 
 N_CLASSES = np.unique([0 , 1])
 
-model = tree.DecisionTreeClassifier()
+model = tree.DecisionTreeClassifier(max_depth=3)
+# model = tree.DecisionTreeClassifier() max_leaf_nodes=8
 
 x_train_file = open('../data/train/x', 'rb')
 y_train_file = open('../data/train/y', 'rb')
