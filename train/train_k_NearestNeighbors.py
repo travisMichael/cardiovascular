@@ -1,7 +1,7 @@
 from sklearn.neighbors import NearestNeighbors
 import pickle
 
-
+# different learning curves for different
 def calculate_results(list, labels):
     results = []
 
@@ -35,7 +35,7 @@ y_train = pickle.load(y_train_file)
 x_test = pickle.load(x_test_file)
 y_test = pickle.load(y_test_file)
 
-model = NearestNeighbors(n_neighbors=1, algorithm='ball_tree').fit(x_train)
+model = NearestNeighbors(n_neighbors=201, algorithm='ball_tree').fit(x_train)
 distances, indices = model.kneighbors(x_test)
 
 # print(indices)

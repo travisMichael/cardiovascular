@@ -7,7 +7,7 @@ import pickle
 
 N_CLASSES = np.unique([0 , 1])
 
-model = MLPClassifier(solver='sgd', validation_fraction=0.15, alpha=1e-4, hidden_layer_sizes=(10, 10), random_state=1)
+model = MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-4, hidden_layer_sizes=(8000,), random_state=1)
 
 x_train_file = open('../data/train/x', 'rb')
 y_train_file = open('../data/train/y', 'rb')
@@ -20,8 +20,18 @@ y_test = pickle.load(y_test_file)
 
 model.fit(x_train, y_train)
 # model.partial_fit(x_train, y_train, classes=N_CLASSES)
-result = model.predict(x_test)
 
+result = model.predict(x_train)
+correct = 0
+incorrect = 0
+for i in range(len(y_train)):
+    if y_train[i] == result[i]:
+        correct += 1
+    else:
+        incorrect += 1
+print(correct / (correct + incorrect))
+
+result = model.predict(x_test)
 correct = 0
 incorrect = 0
 for i in range(len(y_test)):
