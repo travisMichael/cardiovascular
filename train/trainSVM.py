@@ -2,8 +2,10 @@
 from sklearn import svm
 import pickle
 
+# learning curve
 
-model = svm.LinearSVC()
+# model = svm.SVC(kernel='linear', cache_size=400)
+model = svm.SVC(kernel='rbf', gamma=0.001, cache_size=400)
 
 x_train_file = open('../data/train/x', 'rb')
 y_train_file = open('../data/train/y', 'rb')
