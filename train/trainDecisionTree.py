@@ -1,15 +1,13 @@
 import numpy as np
 import pickle
-import matplotlib.pyplot as plt
+from visualization_utils import multiple_learning_curves_plot
 from sklearn import tree
-from sklearn.model_selection import learning_curve
-from sklearn.model_selection import ShuffleSplit
 
 N_CLASSES = np.unique([0 , 1])
 
-model = tree.DecisionTreeClassifier()
-# model = tree.DecisionTreeClassifier(max_depth=3)
-# model = tree.DecisionTreeClassifier() max_leaf_nodes=8
+# model_1 = tree.DecisionTreeClassifier()
+
+# max_leaf_nodes=8
 
 x_train_file = open('../data/train/x', 'rb')
 y_train_file = open('../data/train/y', 'rb')
@@ -20,45 +18,36 @@ y_train = pickle.load(y_train_file)
 x_test = pickle.load(x_test_file)
 y_test = pickle.load(y_test_file)
 
-# model.fit(x_train, y_train)
-# model.partial_fit(x_train, y_train, classes=N_CLASSES)
-# result = model.predict(x_test)
-#
-# correct = 0
-# incorrect = 0
-# for i in range(len(y_test)):
-#     if y_test[i] == result[i]:
-#         correct += 1
-#     else:
-#         incorrect += 1
-# print(correct / (correct + incorrect))
+# model_2 = tree.DecisionTreeClassifier(max_depth=3)
+# model_3 = tree.DecisionTreeClassifier(max_depth=4)
+# model_4 = tree.DecisionTreeClassifier(max_depth=5)
+# model_5 = tree.DecisionTreeClassifier(max_depth=6)
+# model_6 = tree.DecisionTreeClassifier(max_depth=7)
+# plt = multiple_learning_curves_plot(
+#     [model_2, model_3, model_4, model_5, model_6],
+#     x_train, y_train,
+#     ["r", "y", "b", "g", "m"],
+#     ["Max depth = 3", "Max depth = 4", "Max depth = 5", "Max depth = 6", "Max depth = 7"]
+# )
 
-cv = ShuffleSplit(n_splits=100, test_size=0.2, random_state=0)
+model_2 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=60)
+model_3 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=50)
+model_4 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=40)
+model_5 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=30)
+model_6 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=20)
+plt = multiple_learning_curves_plot(
+    [model_2, model_3, model_4, model_5, model_6],
+    x_train, y_train,
+    ["r", "y", "b", "g", "m"],
+    ["Max depth = 3", "Max depth = 4", "Max depth = 5", "Max depth = 6", "Max depth = 7"]
+)
 
-train_sizes, train_scores, test_scores = learning_curve(
-    model, x_train, y_train, cv=cv, n_jobs=2, train_sizes=np.linspace(.1, 1.0, 5))
-
-plt.figure()
 plt.title("Title")
 # if ylim is not None:
 #     plt.ylim(*ylim)
 plt.xlabel("Training examples")
 plt.ylabel("Score")
-train_scores_mean = np.mean(train_scores, axis=1)
-train_scores_std = np.std(train_scores, axis=1)
-test_scores_mean = np.mean(test_scores, axis=1)
-test_scores_std = np.std(test_scores, axis=1)
 plt.grid()
-
-plt.fill_between(train_sizes, train_scores_mean - train_scores_std,
-                 train_scores_mean + train_scores_std, alpha=0.1,
-                 color="r")
-plt.fill_between(train_sizes, test_scores_mean - test_scores_std,
-                 test_scores_mean + test_scores_std, alpha=0.1, color="g")
-plt.plot(train_sizes, train_scores_mean, 'o-', color="r",
-         label="Training score")
-plt.plot(train_sizes, test_scores_mean, 'o-', color="g",
-         label="Cross-validation score")
 
 plt.legend(loc="best")
 plt.show()
