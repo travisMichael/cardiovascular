@@ -4,10 +4,11 @@
 from sklearn.neural_network import MLPClassifier
 import numpy as np
 import pickle
+import os
 
 N_CLASSES = np.unique([0 , 1])
 
-model = MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-4, hidden_layer_sizes=(8000,), random_state=1)
+model = MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-4, hidden_layer_sizes=(10, 10), random_state=1)
 
 x_train_file = open('../data/train/x', 'rb')
 y_train_file = open('../data/train/y', 'rb')
@@ -40,6 +41,11 @@ for i in range(len(y_test)):
     else:
         incorrect += 1
 print(correct / (correct + incorrect))
+
+if not os.path.exists('../model'):
+    os.makedirs('../model')
+
+pickle.dump(model, open("../model/best_Neural_Network_model", 'wb'))
 
 x_train_file.close()
 y_train_file.close()

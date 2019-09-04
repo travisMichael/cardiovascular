@@ -5,6 +5,7 @@ from sklearn import tree
 from sklearn.ensemble import AdaBoostClassifier
 import numpy as np
 import pickle
+import os
 
 N_CLASSES = np.unique([0 , 1])
 
@@ -32,6 +33,11 @@ for i in range(len(y_test)):
     else:
         incorrect += 1
 print(correct / (correct + incorrect))
+
+if not os.path.exists('../model'):
+    os.makedirs('../model')
+
+pickle.dump(model, open("../model/best_boosted_model", 'wb'))
 
 x_train_file.close()
 y_train_file.close()

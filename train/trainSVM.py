@@ -1,11 +1,12 @@
 # https://scikit-learn.org/stable/modules/svm.html
 from sklearn import svm
 import pickle
+import os
 
 # learning curve
 
-# model = svm.SVC(kernel='linear', cache_size=400)
-model = svm.SVC(kernel='rbf', gamma=0.001, cache_size=400)
+model = svm.SVC(kernel='linear', cache_size=400)
+# model = svm.SVC(kernel='rbf', gamma=0.001, cache_size=400)
 
 x_train_file = open('../data/train/x', 'rb')
 y_train_file = open('../data/train/y', 'rb')
@@ -27,6 +28,11 @@ for i in range(len(y_test)):
     else:
         incorrect += 1
 print(correct / (correct + incorrect))
+
+if not os.path.exists('../model'):
+    os.makedirs('../model')
+
+pickle.dump(model, open("../model/best_SVN_model", 'wb'))
 
 x_train_file.close()
 y_train_file.close()
