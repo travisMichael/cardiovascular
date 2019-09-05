@@ -1,3 +1,8 @@
 cardio_train.csv
+loan.csv
+test.py
+test2.py
 **/.idea
 **/data/**
+**/model/**
+**/plot/**
