@@ -37,7 +37,7 @@ def train_k_NN(dataset, path):
     # plt.legend(loc="best")
     # plt.show()
 
-    save_model(model_6, dataset, 'best_decision_tree_model')
+    save_model(model_6, dataset, 'best_kNN_model')
 
     x_train_file.close()
     y_train_file.close()

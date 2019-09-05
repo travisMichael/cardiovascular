@@ -2,6 +2,14 @@ import os
 import time
 import numpy as np
 import torch
+import pickle
+
+
+def save_model(model, dataset, filename):
+    if not os.path.exists('../model/' + dataset):
+        os.makedirs('../model/' + dataset)
+
+    pickle.dump(model, open("../model/" + dataset + "/" + filename, 'wb'))
 
 
 class AverageMeter(object):
@@ -121,15 +129,3 @@ def evaluate(model, device, data_loader, criterion, print_freq=10):
                     i, len(data_loader), batch_time=batch_time, loss=losses, acc=accuracy))
 
     return losses.avg, accuracy.avg, results
-
-
-def make_kaggle_submission(list_id, list_prob, path):
-    if len(list_id) != len(list_prob):
-        raise AttributeError("ID list and Probability list have different lengths")
-
-    os.makedirs(path, exist_ok=True)
-    output_file = open(os.path.join(path, 'my_predictions.csv'), 'w')
-    output_file.write("SUBJECT_ID,MORTALITY\n")
-    for pid, prob in zip(list_id, list_prob):
-        output_file.write("{},{}\n".format(pid, prob))
-    output_file.close()
