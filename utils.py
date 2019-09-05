@@ -5,11 +5,18 @@ import torch
 import pickle
 
 
-def save_model(model, dataset, filename):
-    if not os.path.exists('../model/' + dataset):
-        os.makedirs('../model/' + dataset)
+def save_model(model, path, filename):
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-    pickle.dump(model, open("../model/" + dataset + "/" + filename, 'wb'))
+    pickle.dump(model, open(path + "/" + filename, 'wb'))
+
+
+def save_figure(plt, path, filename):
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    plt.savefig(path + "/" + filename)
 
 
 class AverageMeter(object):

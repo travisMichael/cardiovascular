@@ -3,7 +3,7 @@ import pickle
 import sys
 from visualization_utils import multiple_learning_curves_plot
 from sklearn import tree
-from utils import save_model
+from utils import save_model, save_figure
 
 
 def train_dtc(dataset, path):
@@ -32,13 +32,13 @@ def train_dtc(dataset, path):
     model_4 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=40)
     model_5 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=30)
     model_6 = tree.DecisionTreeClassifier(max_depth=5, max_leaf_nodes=20)
-    model_5.fit(x_train, y_train)
-    # plt = multiple_learning_curves_plot(
-    #     [model_2, model_3, model_4, model_5, model_6],
-    #     x_train, y_train,
-    #     ["r", "y", "b", "g", "m"],
-    #     ["Max depth = 3", "Max depth = 4", "Max depth = 5", "Max depth = 6", "Max depth = 7"]
-    # )
+    # model_5.fit(x_train, y_train)
+    plt = multiple_learning_curves_plot(
+        [model_2],
+        x_train, y_train,
+        ["r", "y", "b", "g", "m"],
+        ["Max depth = 3", "Max depth = 4", "Max depth = 5", "Max depth = 6", "Max depth = 7"]
+    )
 
 
 
@@ -49,7 +49,9 @@ def train_dtc(dataset, path):
     #
     # plt.legend(loc="best")
     # plt.show()
-    save_model(model_5, dataset, 'best_decision_tree_model')
+
+    save_model(model_5, path + "model/" + dataset, 'best_decision_tree_model')
+    save_figure(plt, path + "plot/" + dataset, 'dtc_plots.png')
 
     x_train_file.close()
     y_train_file.close()
