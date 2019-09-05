@@ -1,41 +1,29 @@
 # https://scikit-learn.org/stable/modules/svm.html
 from sklearn import svm
+from utils import save_model
 import pickle
-import os
 
-# learning curve
 
-model = svm.SVC(kernel='linear', cache_size=400)
-# model = svm.SVC(kernel='rbf', gamma=0.001, cache_size=400)
+def train_svm(dataset, path):
+    print('Training Support Vector Machine...')
+    model = svm.SVC(kernel='linear', cache_size=400)
+    # model = svm.SVC(kernel='rbf', gamma=0.001, cache_size=400)
 
-x_train_file = open('../data/train/x', 'rb')
-y_train_file = open('../data/train/y', 'rb')
-x_test_file = open('../data/test/x', 'rb')
-y_test_file = open('../data/test/y', 'rb')
-x_train = pickle.load(x_train_file)
-y_train = pickle.load(y_train_file)
-x_test = pickle.load(x_test_file)
-y_test = pickle.load(y_test_file)
+    x_train_file = open(path + 'data/train/x', 'rb')
+    y_train_file = open(path + 'data/train/y', 'rb')
+    x_train = pickle.load(x_train_file)
+    y_train = pickle.load(y_train_file)
 
-model.fit(x_train, y_train)
-result = model.predict(x_test)
+    model.fit(x_train, y_train)
+    # result = model.predict(x_test)
 
-correct = 0
-incorrect = 0
-for i in range(len(y_test)):
-    if y_test[i] == result[i]:
-        correct += 1
-    else:
-        incorrect += 1
-print(correct / (correct + incorrect))
+    save_model(model, dataset, 'best_SVN_model')
 
-if not os.path.exists('../model'):
-    os.makedirs('../model')
+    x_train_file.close()
+    y_train_file.close()
+    print("done")
 
-pickle.dump(model, open("../model/best_SVN_model", 'wb'))
 
-x_train_file.close()
-y_train_file.close()
-x_test_file.close()
-y_test_file.close()
-print("done")
+if __name__ == "__main__":
+    print('hello')
+    train_svm('cardio', '../')
