@@ -1,19 +1,12 @@
-import numpy as np
-import pickle
-import sys
 from visualization_utils import multiple_learning_curves_plot
 from sklearn import tree
-from utils import save_model, save_figure
+from utils import save_model, save_figure, load_data
 
 
-def train_dtc(dataset, path):
-    print("Training..")
-    N_CLASSES = np.unique([0 , 1])
+def train_dtc(data_set, path):
+    print("Training Decision Tree Classifier...")
 
-    x_train_file = open(path + 'data/train/x', 'rb')
-    y_train_file = open(path + 'data/train/y', 'rb')
-    x_train = pickle.load(x_train_file)
-    y_train = pickle.load(y_train_file)
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
     # model_2 = tree.DecisionTreeClassifier(max_depth=3)
     # model_3 = tree.DecisionTreeClassifier(max_depth=4)
@@ -40,8 +33,6 @@ def train_dtc(dataset, path):
         ["Max depth = 3", "Max depth = 4", "Max depth = 5", "Max depth = 6", "Max depth = 7"]
     )
 
-
-
     # plt.title("Title")
     # plt.xlabel("Training examples")
     # plt.ylabel("Score")
@@ -50,14 +41,10 @@ def train_dtc(dataset, path):
     # plt.legend(loc="best")
     # plt.show()
 
-    save_model(model_5, path + "model/" + dataset, 'best_decision_tree_model')
-    save_figure(plt, path + "plot/" + dataset, 'dtc_plots.png')
-
-    x_train_file.close()
-    y_train_file.close()
+    save_model(model_5, path + "model/" + data_set, 'best_decision_tree_model')
+    save_figure(plt, path + "plot/" + data_set, 'dtc_plots.png')
     print("done")
 
 
 if __name__ == "__main__":
-    print('hello')
     train_dtc('cardio', '../')

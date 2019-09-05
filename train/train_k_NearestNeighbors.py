@@ -1,16 +1,11 @@
 # from sklearn.neighbors import NearestNeighbors
 from sklearn.neighbors import KNeighborsClassifier
-from utils import save_model
+from utils import save_model, load_data
 from visualization_utils import multiple_learning_curves_plot
-import pickle
 
-
-def train_k_NN(dataset, path):
+def train_k_NN(data_set, path):
     print('Training kNN...')
-    x_train_file = open(path + 'data/train/x', 'rb')
-    y_train_file = open(path + 'data/train/y', 'rb')
-    x_train = pickle.load(x_train_file)
-    y_train = pickle.load(y_train_file)
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
     # model = NearestNeighbors(n_neighbors=201, algorithm='ball_tree').fit(x_train)
     # distances, indices = model.kneighbors(x_test)
@@ -37,13 +32,9 @@ def train_k_NN(dataset, path):
     # plt.legend(loc="best")
     # plt.show()
 
-    save_model(model_6, dataset, 'best_kNN_model')
-
-    x_train_file.close()
-    y_train_file.close()
+    save_model(model_6, data_set, 'best_kNN_model')
     print("done")
 
 
 if __name__ == "__main__":
-    print('hello')
     train_k_NN('cardio', '../')

@@ -19,6 +19,16 @@ def save_figure(plt, path, filename):
     plt.savefig(path + "/" + filename)
 
 
+def load_data(path):
+    x_train_file = open(path + 'x', 'rb')
+    y_train_file = open(path + 'y', 'rb')
+    x_train = pickle.load(x_train_file)
+    y_train = pickle.load(y_train_file)
+    x_train_file.close()
+    y_train_file.close()
+    return x_train, y_train
+
+
 class AverageMeter(object):
     """Computes and stores the average and current value"""
 
