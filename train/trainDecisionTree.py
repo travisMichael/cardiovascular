@@ -47,4 +47,4 @@ def train_dtc(data_set, path):
 
 
 if __name__ == "__main__":
-    train_dtc('cardio', '../')
+    train_dtc('loan', '../')

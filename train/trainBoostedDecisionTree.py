@@ -15,7 +15,7 @@ def train_boosted_dtc(data_set, path):
     # model.partial_fit(x_train, y_train, classes=N_CLASSES)
     # result = model.predict(x_test)
 
-    save_model(model, data_set, 'best_boosted_dtc_model')
+    save_model(model, path + 'model/' + data_set, 'best_boosted_dtc_model')
 
     print("done")
 

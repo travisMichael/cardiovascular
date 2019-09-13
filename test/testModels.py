@@ -15,7 +15,7 @@ def test_model(model_to_test, path, data_set):
         test_neural_net(X, y)
         test_svm(X, y)
     elif model_to_test == 'kNN':
-        test_neural_net(X, y)
+        test_kNN(X, y, path, data_set)
     elif model_to_test == 'boosted':
         test_neural_net(X, y)
     elif model_to_test == 'dtc':
@@ -26,8 +26,8 @@ def test_model(model_to_test, path, data_set):
         test_neural_net(X, y)
 
 
-def test_kNN(X, y):
-    kNN = pickle.load(open('../model/best_k_NN_model', 'rb'))
+def test_kNN(X, y, path, data_set):
+    kNN = pickle.load(open(path + 'model/' + data_set + '/best_kNN_model', 'rb'))
     kNN_results = kNN.predict(X)
     kNN_average_precision = average_precision_score(y, kNN_results)
     print("k NN Results: ", kNN_average_precision)

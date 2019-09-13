@@ -1,5 +1,5 @@
 import sys
-from test.testModel import test_model
+from test.testModels import test_model
 
 
 if __name__ == "__main__":

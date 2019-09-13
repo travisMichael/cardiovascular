@@ -12,11 +12,11 @@ def train_k_NN(data_set, path):
     # model = KNeighborsClassifier(n_neighbors=200).fit(x_train, y_train)
     # results = model.predict(x_test)
 
-    model_2 = KNeighborsClassifier(n_neighbors=75)
+    model_2 = KNeighborsClassifier(n_neighbors=25).fit(x_train, y_train)
     model_3 = KNeighborsClassifier(n_neighbors=150)
     model_4 = KNeighborsClassifier(n_neighbors=225)
     model_5 = KNeighborsClassifier(n_neighbors=300)
-    model_6 = KNeighborsClassifier(n_neighbors=50).fit(x_train, y_train)
+    # model_6 = KNeighborsClassifier(n_neighbors=50).fit(x_train, y_train)
     # plt = multiple_learning_curves_plot(
     #     [model_2],
     #     x_train, y_train,
@@ -32,9 +32,9 @@ def train_k_NN(data_set, path):
     # plt.legend(loc="best")
     # plt.show()
 
-    save_model(model_6, data_set, 'best_kNN_model')
+    save_model(model_2, path + 'model/' + data_set, 'best_kNN_model')
     print("done")
 
 
 if __name__ == "__main__":
-    train_k_NN('cardio', '../')
+    train_k_NN('loan', '../')

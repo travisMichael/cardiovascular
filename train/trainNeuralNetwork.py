@@ -12,26 +12,26 @@ def train_neural_net(data_set, path):
 
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    # model.fit(x_train, y_train)
+    model.fit(x_train, y_train)
 
-    plt = multiple_learning_curves_plot(
-        [model],
-        x_train, y_train,
-        ["r", "y", "b", "g", "m"],
-        ["Max depth = 3", "Max depth = 4", "Max depth = 5", "Max depth = 6", "Max depth = 7"]
-    )
+    # plt = multiple_learning_curves_plot(
+    #     [model],
+    #     x_train, y_train,
+    #     ["r", "y", "b", "g", "m"],
+    #     ["Max depth = 3", "Max depth = 4", "Max depth = 5", "Max depth = 6", "Max depth = 7"]
+    # )
 
-    plt.title("Title")
-    plt.xlabel("Training examples")
-    plt.ylabel("Score")
-    plt.grid()
+    # plt.title("Title")
+    # plt.xlabel("Training examples")
+    # plt.ylabel("Score")
+    # plt.grid()
+    #
+    # plt.legend(loc="best")
+    # plt.show()
 
-    plt.legend(loc="best")
-    plt.show()
-
-    save_model(model, data_set, 'best_neural_net_model')
+    save_model(model, path + 'model/' + data_set, 'best_neural_net_model')
     print("done")
 
 
 if __name__ == "__main__":
-    train_neural_net('cardio', '../')
+    train_neural_net('loan', '../')

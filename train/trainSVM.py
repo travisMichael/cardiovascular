@@ -13,7 +13,7 @@ def train_svm(data_set, path):
     model.fit(x_train, y_train)
     # result = model.predict(x_test)
 
-    save_model(model, data_set, 'best_SVN_model')
+    save_model(model, path + 'model/' + data_set, 'best_SVN_model')
     print("done")
 
 
