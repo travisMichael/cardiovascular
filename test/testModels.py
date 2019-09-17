@@ -34,5 +34,5 @@ def test_model(model_to_test, path, data_set):
 
 
 if __name__ == "__main__":
-    test_model('best', '../', 'cardio')
+    test_model('dtc', '../', 'loan')
 

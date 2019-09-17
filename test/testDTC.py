@@ -130,7 +130,7 @@ def test_decision_tree_loan(X, y, path):
     probabilit_list.append(probs)
 
     color_list = ['r', 'y', 'g', 'm', 'b']
-    label_list = ['MD = 5', 'MD = 10', 'MD = 15', 'MD = 20', 'MD = None']
+    label_list = ['MD = 4', 'MD = 8', 'MD = 15', 'MD = 30', 'MD = None']
 
     plt = multiple_precision_recall_curves(y, probabilit_list, color_list, label_list)
 
@@ -178,7 +178,7 @@ def test_decision_tree_with_leaf_nodes_loan(X, y, path):
     probabilit_list.append(probs)
 
     color_list = ['r', 'y', 'g', 'm', 'b']
-    label_list = ['MD = 5', 'MD = 10', 'MD = 15', 'MD = 20', 'MD = None']
+    label_list = ['MLN = 5', 'MLN = 20', 'MLN = 100', 'MLN = 300', 'MLN = None']
 
     plt = multiple_precision_recall_curves(y, probabilit_list, color_list, label_list)
 
@@ -186,7 +186,7 @@ def test_decision_tree_with_leaf_nodes_loan(X, y, path):
     plt.ylabel('Precision')
     plt.ylim([0.0, 1.05])
     plt.xlim([0.0, 1.0])
-    plt.title('Decision Tree Classifier with Max Depth Pruning (MD) \n Precision-Recall Curve ')
+    plt.title('Decision Tree Classifier with Max Leaf Node Pruning (MLN) \n Precision-Recall Curve ')
     plt.legend(loc="best")
 
     save_figure(plt, path + "plot/" + data_set, 'dtc_max_leaf_nodes_pr_curve.png')
