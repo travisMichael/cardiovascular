@@ -19,7 +19,7 @@ def pre_process_loan_data(path):
 
     df['good_loan'] = np.where((df.loan_status == 'Fully Paid') |
                                (df.loan_status == 'Current') |
-                               (df.loan_status == 'Does not meet the credit policy. Status:Fully Paid'), 1, 0)
+                               (df.loan_status == 'Does not meet the credit policy. Status:Fully Paid'), 0, 1)
 
     lack_of_data_idx = [x for x in df.count() < 887379*0.25]
     df.drop(df.columns[lack_of_data_idx], 1, inplace=True)
@@ -79,25 +79,6 @@ def pre_process_loan_data(path):
     y_train_file.close()
     x_test_file.close()
     y_test_file.close()
-
-
-    # y_0 = len(y_train[y_train == 0])/len(y_train)
-    # y_1 = 1 - y_0
-    #
-    # svm_clf = SVC(class_weight={0:y_1, 1:y_0})
-    # svm_clf.fit(X_train_R, y_train)
-    #
-    # svm_predictions = svm_clf.predict(X_test_R) # Save prediction
-    #
-    #
-    # scores = cross_val_score(svm_clf, X_test_R, y_test, cv=5)
-    # print(scores)
-    # print("Accuracy: %0.2f (+/- %0.2f)\n" % (scores.mean(), scores.std() * 2))
-    #
-    # print(mt.classification_report(y_test, svm_predictions))
-    # print(mt.confusion_matrix(y_test, svm_predictions))
-    # print(df.shape)
-    # print('done')
 
 
 if __name__ == "__main__":
