@@ -4,6 +4,7 @@ from utils import load_data
 from test.testDTC import test_decision_tree, test_decision_tree_max_leaf
 from test.testNeuralNet import test_neural_net_cardio
 from test.testKNN import test_kNN
+from test.testBoostedDTC import test_boosted_decision_tree
 
 
 def test_model(model_to_test, path, data_set):
@@ -18,7 +19,7 @@ def test_model(model_to_test, path, data_set):
     elif model_to_test == 'kNN':
         test_kNN(X, y, path)
     elif model_to_test == 'boosted':
-        test_boosted(X, y)
+        test_boosted_decision_tree(X, y, path)
     elif model_to_test == 'dtc':
         test_decision_tree(X, y, path, data_set)
         test_decision_tree_max_leaf(X, y, path, data_set)
@@ -43,5 +44,5 @@ def test_svm(X, y):
 
 
 if __name__ == "__main__":
-    test_model('kNN', '../', 'cardio')
+    test_model('boosted', '../', 'cardio')
 
