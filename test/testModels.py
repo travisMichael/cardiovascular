@@ -1,12 +1,12 @@
 import pickle
-import numpy as np
-from sklearn.metrics import confusion_matrix
 from sklearn.metrics import average_precision_score
 from utils import load_data
+from visualization_utils import multiple_precision_recall_curves
+from test.testDTC import test_decision_tree, test_decision_tree_max_leaf
 
 
 def test_model(model_to_test, path, data_set):
-    X, y = load_data(path + 'data/' + data_set + '/train/')
+    X, y = load_data(path + 'data/' + data_set + '/test/')
 
     if model_to_test == 'all':
         test_boosted(X, y)
@@ -17,13 +17,14 @@ def test_model(model_to_test, path, data_set):
     elif model_to_test == 'kNN':
         test_kNN(X, y, path, data_set)
     elif model_to_test == 'boosted':
-        test_neural_net(X, y)
+        test_neural_net(X, y, data_set)
     elif model_to_test == 'dtc':
-        test_neural_net(X, y)
+        test_decision_tree(X, y, path, data_set)
+        test_decision_tree_max_leaf(X, y, path, data_set)
     elif model_to_test == 'neural_net':
-        test_neural_net(X, y)
+        test_neural_net(X, y, data_set)
     elif model_to_test == 'svm':
-        test_neural_net(X, y)
+        test_neural_net(X, y, data_set)
 
 
 def test_kNN(X, y, path, data_set):
@@ -40,21 +41,28 @@ def test_boosted(X, y):
     print("Boosted Decision Tree Results: ", boosted_model_average_precision)
 
 
-def test_decision_tree(X, y):
-    dtc = pickle.load(open('../model/best_decision_tree_model', 'rb'))
-    dtc_results = dtc.predict(X)
-    dtc_average_precision = average_precision_score(y, dtc_results)
+def test_neural_net(X, y, data_set):
+    probabilit_list = []
+    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_1', 'rb'))
+    probs = dtc.predict_proba(X)
+    probs = probs[:, 1]
+    probabilit_list.append(probs)
+
+    dtc = pickle.load(open('../model/' + data_set + '/best_neural_net_model', 'rb'))
+    probs = dtc.predict_proba(X)
+    probs = probs[:, 1]
+    probabilit_list.append(probs)
+
+    color_list = ['r', 'b']
+    label_list = ['one', 'two']
+
+    plt = multiple_precision_recall_curves(y, probabilit_list, color_list, label_list)
+
+    plt.show()
+    dtc_average_precision = average_precision_score(y, probabilit_list[0])
     print("Decision Tree Results: ", dtc_average_precision)
-
-
-def test_neural_net(X, y):
-    neural_net = pickle.load(open('../model/loan/best_neural_net_model', 'rb'))
-    neural_net_results = neural_net.predict(X)
-    neural_net_average_precision = average_precision_score(y, neural_net_results)
-    print("Neural Net Results: ", neural_net_average_precision)
-    # neural_net_results
-    # cm = confusion_matrix(y_test, neural_net_results)
-    # cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    dtc_average_precision = average_precision_score(y, dtc.predict(X))
+    print("Decision Tree Results: ", dtc_average_precision)
 
 
 def test_svm(X, y):
@@ -65,5 +73,5 @@ def test_svm(X, y):
 
 
 if __name__ == "__main__":
-    test_model('kNN', '../', 'loan')
+    test_model('dtc', '../', 'cardio')
 
