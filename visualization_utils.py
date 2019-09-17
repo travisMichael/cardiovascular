@@ -30,8 +30,8 @@ def multiple_learning_curves_plot(model_list, x, y, colors, training_labels):
 
         plt.fill_between(train_sizes, train_scores_mean - train_scores_std, train_scores_mean + train_scores_std, alpha=0.1, color=curve_color)
         plt.fill_between(train_sizes, test_scores_mean - test_scores_std, test_scores_mean + test_scores_std, alpha=0.1, color=curve_color)
-        plt.plot(train_sizes, train_scores_mean, 'o-', color=curve_color, label=label)
-        plt.plot(train_sizes, test_scores_mean, 'o-', color=curve_color, linestyle='dashed')
+        plt.plot(train_sizes, train_scores_mean, color=curve_color, label=label)
+        plt.plot(train_sizes, test_scores_mean, color=curve_color, linestyle='dashed')
         end_time = time.time() - start_time
         print("Learning curve finished for model: " + str(i) + " " + str(end_time))
     return plt
