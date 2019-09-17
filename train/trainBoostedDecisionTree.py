@@ -1,7 +1,8 @@
 # https://statinfer.com/204-3-10-pruning-a-decision-tree-in-python/
 from sklearn import tree
 from sklearn.ensemble import AdaBoostClassifier
-from utils import save_model, load_data
+from utils import save_model, load_data, save_figure
+from visualization_utils import multiple_learning_curves_plot
 
 
 def train_boosted_dtc(data_set, path, with_plots):
@@ -27,17 +28,24 @@ def train_boosted_dtc(data_set, path, with_plots):
 
     else:
         print('Training boosted dtc...')
-        # model = tree.DecisionTreeClassifier() max_depth=4
-        model = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=3), )
-
-        model.fit(x_train, y_train)
-        # model.partial_fit(x_train, y_train, classes=N_CLASSES)
-        # result = model.predict(x_test)
-
-        save_model(model, path + 'model/' + data_set, 'best_boosted_dtc_model')
-
-        print("done")
+        model_1 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=5))
+        model_2 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=10))
+        model_3 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=15))
+        model_4 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=20))
+        model_5 = AdaBoostClassifier(tree.DecisionTreeClassifier())
+        plt = multiple_learning_curves_plot(
+            [model_1, model_2, model_3, model_4, model_5],
+            x_train, y_train,
+            ["r", "y", "g", "m", "b"],
+            ["MD = 5", "MD = 10", "MD = 15", "MD = 20", "MD = None"]
+        )
+        plt.title("Boosted Decision Tree With Max Depth (MD) \n Pruning Learning Curves")
+        plt.xlabel("Training examples")
+        plt.ylabel("F1 Score")
+        plt.grid()
+        plt.legend(loc="best")
+        save_figure(plt, path + "plot/" + data_set, 'boosted_dtc_md_learning_curves.png')
 
 
 if __name__ == "__main__":
-    train_boosted_dtc('cardio', '../', False)
+    train_boosted_dtc('cardio', '../', True)
