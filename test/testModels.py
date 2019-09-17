@@ -3,6 +3,7 @@ from sklearn.metrics import average_precision_score
 from utils import load_data
 from test.testDTC import test_decision_tree, test_decision_tree_max_leaf
 from test.testNeuralNet import test_neural_net_cardio
+from test.testKNN import test_kNN
 
 
 def test_model(model_to_test, path, data_set):
@@ -15,7 +16,7 @@ def test_model(model_to_test, path, data_set):
         test_neural_net_cardio(X, y, path)
         test_svm(X, y)
     elif model_to_test == 'kNN':
-        test_kNN(X, y, path, data_set)
+        test_kNN(X, y, path)
     elif model_to_test == 'boosted':
         test_boosted(X, y)
     elif model_to_test == 'dtc':
@@ -25,13 +26,6 @@ def test_model(model_to_test, path, data_set):
         test_neural_net_cardio(X, y, path)
     elif model_to_test == 'svm':
         test_svm(X, y)
-
-
-def test_kNN(X, y, path, data_set):
-    kNN = pickle.load(open(path + 'model/' + data_set + '/best_kNN_model', 'rb'))
-    kNN_results = kNN.predict(X)
-    kNN_average_precision = average_precision_score(y, kNN_results)
-    print("k NN Results: ", kNN_average_precision)
 
 
 def test_boosted(X, y):
@@ -49,5 +43,5 @@ def test_svm(X, y):
 
 
 if __name__ == "__main__":
-    test_model('neural_net', '../', 'cardio')
+    test_model('kNN', '../', 'cardio')
 
