@@ -53,7 +53,7 @@ def test_boosted_decision_tree(X, y, path):
 
 
 def test_boosted_decision_tree_loan(X, y, path):
-    data_set = 'cardio'
+    data_set = 'loan'
     probabilit_list = []
     dtc = pickle.load(open('../model/' + data_set + '/boosted_dtc_model_nodes_1', 'rb'))
     probs = dtc.predict_proba(X)
@@ -81,13 +81,13 @@ def test_boosted_decision_tree_loan(X, y, path):
     probabilit_list.append(probs)
 
     color_list = ['r', 'y', 'g', 'm', 'b']
-    label_list = ['MD = 5', 'MD = 10', 'MD = 15', 'MD = 20', 'MD = None']
+    label_list = ['MD = 4', 'MD = 8', 'MD = 15', 'MD = 30', 'MD = None']
 
     plt = multiple_precision_recall_curves(y, probabilit_list, color_list, label_list)
 
     plt.xlabel('Recall')
     plt.ylabel('Precision')
-    plt.ylim([0.5, 1.05])
+    plt.ylim([0.0, 1.05])
     plt.xlim([0.0, 1.0])
     plt.title('Boosted Decision Tree Classifier with Max Depth Pruning (MD) \n Precision-Recall Curve ')
     plt.legend(loc="best")
