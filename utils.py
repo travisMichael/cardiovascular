@@ -3,6 +3,7 @@ import time
 import numpy as np
 import torch
 import pickle
+from sklearn.metrics import f1_score
 
 
 def save_model(model, path, filename):
@@ -27,6 +28,14 @@ def load_data(path):
     x_train_file.close()
     y_train_file.close()
     return x_train, y_train
+
+
+def calculate_f1_score(model, X, y):
+    start_time = time.time()
+    predictions = model.predict(X)
+    end_time = time.time() - start_time
+    score = f1_score(y, predictions)
+    print("f1 score", score, "prediction time", end_time)
 
 
 class AverageMeter(object):

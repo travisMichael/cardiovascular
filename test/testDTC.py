@@ -1,7 +1,6 @@
 import pickle
-from sklearn.metrics import average_precision_score, f1_score
 from visualization_utils import multiple_precision_recall_curves
-from utils import save_figure
+from utils import save_figure, calculate_f1_score
 
 
 def test_decision_tree(X, y, path):
@@ -11,26 +10,31 @@ def test_decision_tree(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'y', 'g', 'm', 'b']
     label_list = ['MD = 5', 'MD = 10', 'MD = 15', 'MD = 20', 'MD = None']
@@ -45,11 +49,6 @@ def test_decision_tree(X, y, path):
     plt.legend(loc="best")
 
     save_figure(plt, path + "plot/" + data_set, 'dtc_max_depth_plots.png')
-    dtc_average_precision = average_precision_score(y, probs)
-    print("Decision Tree Results: ", dtc_average_precision)
-
-    dtc_average_precision = f1_score(y, dtc.predict(X))
-    print("Decision Tree Results: ", dtc_average_precision)
 
 
 def test_decision_tree_max_leaf(X, y, path):
@@ -60,21 +59,25 @@ def test_decision_tree_max_leaf(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
@@ -94,11 +97,6 @@ def test_decision_tree_max_leaf(X, y, path):
     plt.legend(loc="best")
 
     save_figure(plt, path + "plot/" + data_set, 'dtc_max_leaf_nodes_plots.png')
-    dtc_average_precision = average_precision_score(y, probs)
-    print("Decision Tree Results: ", dtc_average_precision)
-
-    dtc_average_precision = f1_score(y, dtc.predict(X))
-    print("Decision Tree Results: ", dtc_average_precision)
 
 
 def test_decision_tree_loan(X, y, path):
@@ -108,26 +106,31 @@ def test_decision_tree_loan(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_depth_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_depth_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_depth_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'y', 'g', 'm', 'b']
     label_list = ['MD = 4', 'MD = 8', 'MD = 15', 'MD = 30', 'MD = None']
@@ -142,11 +145,6 @@ def test_decision_tree_loan(X, y, path):
     plt.legend(loc="best")
 
     save_figure(plt, path + "plot/" + data_set, 'dtc_max_depth_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, probs)
-    print("Decision Tree Results: ", dtc_average_precision)
-
-    dtc_average_precision = f1_score(y, dtc.predict(X))
-    print("Decision Tree Results: ", dtc_average_precision)
 
 
 def test_decision_tree_with_leaf_nodes_loan(X, y, path):
@@ -156,26 +154,31 @@ def test_decision_tree_with_leaf_nodes_loan(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'y', 'g', 'm', 'b']
     label_list = ['MLN = 5', 'MLN = 20', 'MLN = 100', 'MLN = 300', 'MLN = None']
@@ -189,9 +192,3 @@ def test_decision_tree_with_leaf_nodes_loan(X, y, path):
     plt.title('Decision Tree Classifier with Max Leaf Node Pruning (MLN) \n Precision-Recall Curve ')
     plt.legend(loc="best")
 
-    save_figure(plt, path + "plot/" + data_set, 'dtc_max_leaf_nodes_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, probs)
-    print("Decision Tree Results: ", dtc_average_precision)
-
-    dtc_average_precision = f1_score(y, dtc.predict(X))
-    print("Decision Tree Results: ", dtc_average_precision)

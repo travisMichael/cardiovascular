@@ -1,5 +1,4 @@
 import pickle
-from sklearn.metrics import average_precision_score
 from visualization_utils import multiple_precision_recall_curves
 from utils import save_figure
 
@@ -46,5 +45,3 @@ def test_best_models_loan(X, y, path):
 
     # plt.show()
     save_figure(plt, path + "plot/" + data_set, 'best_models_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, dtc.predict(X))
-    print("Neural Ne Results: ", dtc_average_precision)
