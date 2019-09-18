@@ -18,11 +18,11 @@ def test_model(model_to_test, path, data_set):
         test_neural_net_cardio(X, y, path)
         test_svm(X, y)
     elif model_to_test == 'kNN':
-        # test_kNN(X, y, path)
-        test_kNN_loan(X, y, path)
+        test_kNN(X, y, path)
+        # test_kNN_loan(X, y, path)
     elif model_to_test == 'boosted':
-        # test_boosted_decision_tree(X, y, path)
-        test_boosted_decision_tree_loan(X, y, path)
+        test_boosted_decision_tree(X, y, path)
+        # test_boosted_decision_tree_loan(X, y, path)
     elif model_to_test == 'dtc':
         # test_decision_tree(X, y, path)
         # test_decision_tree_max_leaf(X, y, path)
@@ -33,12 +33,12 @@ def test_model(model_to_test, path, data_set):
         test_neural_net_loan(X, y, path)
     elif model_to_test == 'svm':
         test_svm(X, y, path)
-        test_svm_loan(X, y, path)
+        # test_svm_loan(X, y, path)
     elif model_to_test == 'best':
         # test_best_models_cardio(X, y, path)
         test_best_models_loan(X, y, path)
 
 
 if __name__ == "__main__":
-    test_model('dtc', '../', 'loan')
+    test_model('svm', '../', 'cardio')
 

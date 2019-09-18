@@ -1,7 +1,6 @@
 import pickle
-from sklearn.metrics import average_precision_score
 from visualization_utils import multiple_precision_recall_curves
-from utils import save_figure
+from utils import save_figure, calculate_f1_score
 
 
 def test_svm(X, y, path):
@@ -13,12 +12,14 @@ def test_svm(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 2")
     dtc = pickle.load(open('../model/' + data_set + '/svm_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'b']
     label_list = ['kernel = linear', 'kernel = polynomial']
@@ -34,8 +35,6 @@ def test_svm(X, y, path):
 
     # plt.show()
     save_figure(plt, path + "plot/" + data_set, 'svm_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, dtc.predict(X))
-    print("Neural Ne Results: ", dtc_average_precision)
 
 
 def test_svm_loan(X, y, path):
@@ -68,5 +67,3 @@ def test_svm_loan(X, y, path):
 
     # plt.show()
     save_figure(plt, path + "plot/" + data_set, 'svm_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, dtc.predict(X))
-    print("Neural Ne Results: ", dtc_average_precision)

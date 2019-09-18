@@ -1,8 +1,6 @@
 import pickle
-from sklearn.metrics import average_precision_score
-from utils import load_data
 from visualization_utils import multiple_precision_recall_curves
-from utils import save_figure
+from utils import save_figure, calculate_f1_score
 
 
 def test_neural_net_cardio(X, y, path):
@@ -12,21 +10,25 @@ def test_neural_net_cardio(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'b', 'm', 'y']
     label_list = ['HLS = 5', 'HLS = 40', 'HLS = 5 x 5', 'HLS = 40 x 40']
@@ -42,8 +44,6 @@ def test_neural_net_cardio(X, y, path):
 
     # plt.show()
     save_figure(plt, path + "plot/" + data_set, 'neural_net_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, dtc.predict(X))
-    print("Neural Ne Results: ", dtc_average_precision)
 
 
 def test_neural_net_loan(X, y, path):
@@ -53,21 +53,25 @@ def test_neural_net_loan(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'b', 'm', 'y']
     label_list = ['HLS = 20 x 5', 'HLS = 50 x 5', 'HLS = 100 x 5', 'HLS = 500 x 5']
@@ -83,5 +87,3 @@ def test_neural_net_loan(X, y, path):
 
     # plt.show()
     save_figure(plt, path + "plot/" + data_set, 'neural_net_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, dtc.predict(X))
-    print("Neural Ne Results: ", dtc_average_precision)

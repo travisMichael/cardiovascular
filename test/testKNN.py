@@ -1,7 +1,6 @@
 import pickle
-from sklearn.metrics import average_precision_score
 from visualization_utils import multiple_precision_recall_curves
-from utils import save_figure
+from utils import save_figure, calculate_f1_score
 
 
 def test_kNN(X, y, path):
@@ -13,24 +12,28 @@ def test_kNN(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 2")
     dtc = pickle.load(open('../model/' + data_set + '/kNN_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 3")
     dtc = pickle.load(open('../model/' + data_set + '/kNN_model_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 4")
     dtc = pickle.load(open('../model/' + data_set + '/kNN_model_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'b', 'm', 'y']
     label_list = ['k = 25', 'k = 150', 'k = 225', 'k = 300']
@@ -46,8 +49,6 @@ def test_kNN(X, y, path):
 
     # plt.show()
     save_figure(plt, path + "plot/" + data_set, 'kNN_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, dtc.predict(X))
-    print("Neural Ne Results: ", dtc_average_precision)
 
 
 def test_kNN_loan(X, y, path):
@@ -59,24 +60,28 @@ def test_kNN_loan(X, y, path):
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 2")
     dtc = pickle.load(open('../model/' + data_set + '/kNN_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 3")
     dtc = pickle.load(open('../model/' + data_set + '/kNN_model_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 4")
     dtc = pickle.load(open('../model/' + data_set + '/kNN_model_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'b', 'm', 'y']
     label_list = ['k = 5', 'k = 10', 'k = 25', 'k = 100']
@@ -92,5 +97,3 @@ def test_kNN_loan(X, y, path):
 
     # plt.show()
     save_figure(plt, path + "plot/" + data_set, 'kNN_pr_curve.png')
-    dtc_average_precision = average_precision_score(y, dtc.predict(X))
-    print("Neural Ne Results: ", dtc_average_precision)
