@@ -38,6 +38,14 @@ def calculate_f1_score(model, X, y):
     print("f1 score", score, "prediction time", end_time)
 
 
+def train_and_time(model, X, y):
+    start_time = time.time()
+    model.fit(X, y)
+    end_time = time.time() - start_time
+    print("training time", end_time)
+    return model
+
+
 class AverageMeter(object):
     """Computes and stores the average and current value"""
 

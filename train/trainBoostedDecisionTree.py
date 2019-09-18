@@ -1,7 +1,7 @@
 # https://statinfer.com/204-3-10-pruning-a-decision-tree-in-python/
 from sklearn import tree
 from sklearn.ensemble import AdaBoostClassifier
-from utils import save_model, load_data, save_figure
+from utils import save_model, load_data, save_figure, train_and_time
 from visualization_utils import multiple_learning_curves_plot
 
 
@@ -10,15 +10,11 @@ def train_boosted_dtc(path, with_plots):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
     if not with_plots:
-        print("training 1")
-        model_nodes_1 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=5)).fit(x_train, y_train)
-        print("training 2")
-        model_nodes_2 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=10)).fit(x_train, y_train)
-        print("training 3")
-        model_nodes_3 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=15)).fit(x_train, y_train)
-        print("training 4")
-        model_nodes_4 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=20)).fit(x_train, y_train)
-        model_nodes_5 = AdaBoostClassifier(tree.DecisionTreeClassifier()).fit(x_train, y_train)
+        model_nodes_1 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=5)), x_train, y_train)
+        model_nodes_2 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=10)), x_train, y_train)
+        model_nodes_3 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=15)), x_train, y_train)
+        model_nodes_4 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=20)), x_train, y_train)
+        model_nodes_5 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier()), x_train, y_train)
 
         save_model(model_nodes_1, path + "model/" + data_set, 'boosted_dtc_model_nodes_1')
         save_model(model_nodes_2, path + "model/" + data_set, 'boosted_dtc_model_nodes_2')
@@ -52,15 +48,11 @@ def train_boosted_dtc_loan(path, with_plots):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
     if not with_plots:
-        print("training 1")
-        model_nodes_1 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=4)).fit(x_train, y_train)
-        print("training 2")
-        model_nodes_2 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=8)).fit(x_train, y_train)
-        print("training 3")
-        model_nodes_3 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=15)).fit(x_train, y_train)
-        print("training 4")
-        model_nodes_4 = AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=30)).fit(x_train, y_train)
-        model_nodes_5 = AdaBoostClassifier(tree.DecisionTreeClassifier()).fit(x_train, y_train)
+        model_nodes_1 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=4)), x_train, y_train)
+        model_nodes_2 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=8)), x_train, y_train)
+        model_nodes_3 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=15)), x_train, y_train)
+        model_nodes_4 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier(max_depth=30)), x_train, y_train)
+        model_nodes_5 = train_and_time(AdaBoostClassifier(tree.DecisionTreeClassifier()), x_train, y_train)
 
         save_model(model_nodes_1, path + "model/" + data_set, 'boosted_dtc_model_nodes_1')
         save_model(model_nodes_2, path + "model/" + data_set, 'boosted_dtc_model_nodes_2')
@@ -90,5 +82,5 @@ def train_boosted_dtc_loan(path, with_plots):
 
 
 if __name__ == "__main__":
-    # train_boosted_dtc('../', True)
-    train_boosted_dtc_loan('../', True)
+    # train_boosted_dtc('../', False)
+    train_boosted_dtc_loan('../', False)

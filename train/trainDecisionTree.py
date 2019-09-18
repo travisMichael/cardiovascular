@@ -1,6 +1,6 @@
 from visualization_utils import multiple_learning_curves_plot, multiple_precision_recall_curves
 from sklearn import tree
-from utils import save_model, save_figure, load_data
+from utils import save_model, save_figure, load_data, train_and_time
 
 
 def train_dtc(path, with_plots):
@@ -12,14 +12,11 @@ def train_dtc(path, with_plots):
     if not with_plots:
 
         print("training 1")
-        model_nodes_1 = tree.DecisionTreeClassifier(max_depth=5).fit(x_train, y_train)
-        print("training 2")
-        model_nodes_2 = tree.DecisionTreeClassifier(max_depth=10).fit(x_train, y_train)
-        print("training 3")
-        model_nodes_3 = tree.DecisionTreeClassifier(max_depth=15).fit(x_train, y_train)
-        print("training 4")
-        model_nodes_4 = tree.DecisionTreeClassifier(max_depth=20).fit(x_train, y_train)
-        model_nodes_5 = tree.DecisionTreeClassifier().fit(x_train, y_train)
+        model_nodes_1 = train_and_time(tree.DecisionTreeClassifier(max_depth=5), x_train, y_train)
+        model_nodes_2 = train_and_time(tree.DecisionTreeClassifier(max_depth=10), x_train, y_train)
+        model_nodes_3 = train_and_time(tree.DecisionTreeClassifier(max_depth=15), x_train, y_train)
+        model_nodes_4 = train_and_time(tree.DecisionTreeClassifier(max_depth=20), x_train, y_train)
+        model_nodes_5 = train_and_time(tree.DecisionTreeClassifier(), x_train, y_train)
 
         save_model(model_nodes_1, path + "model/" + data_set, 'dtc_model_nodes_1')
         save_model(model_nodes_2, path + "model/" + data_set, 'dtc_model_nodes_2')
@@ -27,14 +24,10 @@ def train_dtc(path, with_plots):
         save_model(model_nodes_4, path + "model/" + data_set, 'dtc_model_nodes_4')
         save_model(model_nodes_5, path + "model/" + data_set, 'dtc_none')
 
-        print("training 6")
-        model_leaf_nodes_1 = tree.DecisionTreeClassifier(max_leaf_nodes=20).fit(x_train, y_train)
-        print("training 7")
-        model_leaf_nodes_2 = tree.DecisionTreeClassifier(max_leaf_nodes=100).fit(x_train, y_train)
-        print("training 8")
-        model_leaf_nodes_3 = tree.DecisionTreeClassifier(max_leaf_nodes=1000).fit(x_train, y_train)
-        print("training 5")
-        model_leaf_nodes_4 = tree.DecisionTreeClassifier(max_leaf_nodes=2000).fit(x_train, y_train)
+        model_leaf_nodes_1 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=20), x_train, y_train)
+        model_leaf_nodes_2 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=100), x_train, y_train)
+        model_leaf_nodes_3 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=1000), x_train, y_train)
+        model_leaf_nodes_4 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=2000), x_train, y_train)
 
         save_model(model_leaf_nodes_1, path + "model/" + data_set, 'dtc_model_leaf_nodes_1')
         save_model(model_leaf_nodes_2, path + "model/" + data_set, 'dtc_model_leaf_nodes_2')
@@ -91,15 +84,11 @@ def train_dtc_loan(path, with_plots):
 
     if not with_plots:
 
-        print("training 1")
-        model_nodes_1 = tree.DecisionTreeClassifier(max_depth=4).fit(x_train, y_train)
-        print("training 2")
-        model_nodes_2 = tree.DecisionTreeClassifier(max_depth=8).fit(x_train, y_train)
-        print("training 3")
-        model_nodes_3 = tree.DecisionTreeClassifier(max_depth=15).fit(x_train, y_train)
-        print("training 4")
-        model_nodes_4 = tree.DecisionTreeClassifier(max_depth=30).fit(x_train, y_train)
-        model_nodes_5 = tree.DecisionTreeClassifier().fit(x_train, y_train)
+        model_nodes_1 = train_and_time(tree.DecisionTreeClassifier(max_depth=4), x_train, y_train)
+        model_nodes_2 = train_and_time(tree.DecisionTreeClassifier(max_depth=8), x_train, y_train)
+        model_nodes_3 = train_and_time(tree.DecisionTreeClassifier(max_depth=15), x_train, y_train)
+        model_nodes_4 = train_and_time(tree.DecisionTreeClassifier(max_depth=30), x_train, y_train)
+        model_nodes_5 = train_and_time(tree.DecisionTreeClassifier(), x_train, y_train)
 
         save_model(model_nodes_1, path + "model/" + data_set, 'dtc_model_depth_1')
         save_model(model_nodes_2, path + "model/" + data_set, 'dtc_model_depth_2')
@@ -107,14 +96,10 @@ def train_dtc_loan(path, with_plots):
         save_model(model_nodes_4, path + "model/" + data_set, 'dtc_model_depth_4')
         save_model(model_nodes_5, path + "model/" + data_set, 'dtc_none')
 
-        print("training 6")
-        model_leaf_nodes_1 = tree.DecisionTreeClassifier(max_leaf_nodes=5).fit(x_train, y_train)
-        print("training 7")
-        model_leaf_nodes_2 = tree.DecisionTreeClassifier(max_leaf_nodes=20).fit(x_train, y_train)
-        print("training 8")
-        model_leaf_nodes_3 = tree.DecisionTreeClassifier(max_leaf_nodes=100).fit(x_train, y_train)
-        print("training 9")
-        model_leaf_nodes_4 = tree.DecisionTreeClassifier(max_leaf_nodes=300).fit(x_train, y_train)
+        model_leaf_nodes_1 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=5), x_train, y_train)
+        model_leaf_nodes_2 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=20), x_train, y_train)
+        model_leaf_nodes_3 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=100), x_train, y_train)
+        model_leaf_nodes_4 = train_and_time(tree.DecisionTreeClassifier(max_leaf_nodes=300), x_train, y_train)
 
         save_model(model_leaf_nodes_1, path + "model/" + data_set, 'dtc_model_leaf_nodes_1')
         save_model(model_leaf_nodes_2, path + "model/" + data_set, 'dtc_model_leaf_nodes_2')
@@ -164,5 +149,5 @@ def train_dtc_loan(path, with_plots):
 
 
 if __name__ == "__main__":
-    # train_dtc('../', True)
-    train_dtc_loan('../', True)
+    # train_dtc('../', False)
+    train_dtc_loan('../', False)
