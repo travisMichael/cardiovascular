@@ -3,10 +3,8 @@ import numpy as np
 import pickle
 import os
 from sklearn.model_selection import train_test_split
-# from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler, RobustScaler
-# import sklearn.metrics as mt
-# from sklearn.model_selection import cross_val_score
+
 
 def pre_process_loan_data(path):
     df = pd.read_csv(path + "loan.csv", delimiter=",")
