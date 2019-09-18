@@ -42,16 +42,18 @@ def test_svm_loan(X, y, path):
 
     print("Predicting 1")
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/svm_model_1', 'rb'))
+    dtc = pickle.load(open('../model/' + data_set + '/f_svm_model_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     print("Predicting 2")
-    dtc = pickle.load(open('../model/' + data_set + '/svm_model_2', 'rb'))
+    dtc = pickle.load(open('../model/' + data_set + '/f_svm_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
+    calculate_f1_score(dtc, X, y)
 
     color_list = ['r', 'b']
     label_list = ['kernel = linear', 'kernel = polynomial']
@@ -60,7 +62,7 @@ def test_svm_loan(X, y, path):
 
     plt.xlabel('Recall')
     plt.ylabel('Precision')
-    plt.ylim([0.5, 1.05])
+    plt.ylim([0.0, 1.05])
     plt.xlim([0.0, 1.0])
     plt.title('Support Vector Machine Precision-Recall Curve')
     plt.legend(loc="best")

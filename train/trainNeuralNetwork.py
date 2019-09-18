@@ -54,7 +54,7 @@ def train_neural_net_with_loan_data(path, with_plots):
         model_1 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(20, 5), random_state=1), x_train, y_train)
         model_2 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(50, 5), random_state=1), x_train, y_train)
         model_3 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(100, 5), random_state=1), x_train, y_train)
-        model_4 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(500, 40), random_state=1), x_train, y_train)
+        model_4 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(500, 5), random_state=1), x_train, y_train)
 
         save_model(model_1, path + 'model/' + data_set, 'neural_net_model_1')
         save_model(model_2, path + 'model/' + data_set, 'neural_net_model_2')

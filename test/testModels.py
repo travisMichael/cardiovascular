@@ -32,13 +32,13 @@ def test_model(model_to_test, path, data_set):
         # test_neural_net_cardio(X, y, path)
         test_neural_net_loan(X, y, path)
     elif model_to_test == 'svm':
-        test_svm(X, y, path)
-        # test_svm_loan(X, y, path)
+        # test_svm(X, y, path)
+        test_svm_loan(X, y, path)
     elif model_to_test == 'best':
         # test_best_models_cardio(X, y, path)
         test_best_models_loan(X, y, path)
 
 
 if __name__ == "__main__":
-    test_model('svm', '../', 'cardio')
+    test_model('svm', '../', 'loan')
 
