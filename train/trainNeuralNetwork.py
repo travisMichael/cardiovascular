@@ -10,7 +10,7 @@ def train_neural_net(path, with_plots):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    if not with_plots:
+    if with_plots == "False":
         model_1 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(5,), random_state=1), x_train, y_train)
         model_2 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(40,), random_state=1), x_train, y_train)
         model_3 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(5, 5), random_state=1), x_train, y_train)
@@ -50,7 +50,7 @@ def train_neural_net_with_loan_data(path, with_plots):
     data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    if not with_plots:
+    if with_plots == "False":
         model_1 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(20, 5), random_state=1), x_train, y_train)
         model_2 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(50, 5), random_state=1), x_train, y_train)
         model_3 = train_and_time(MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(100, 5), random_state=1), x_train, y_train)
@@ -88,4 +88,4 @@ def train_neural_net_with_loan_data(path, with_plots):
 
 if __name__ == "__main__":
     # train_neural_net('../', False)
-    train_neural_net_with_loan_data('../', False)
+    train_neural_net_with_loan_data('../', "False")

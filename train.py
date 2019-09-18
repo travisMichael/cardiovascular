@@ -1,9 +1,9 @@
 import sys
-from train.trainDecisionTree import train_dtc
-from train.train_k_NearestNeighbors import train_k_NN
-from train.trainBoostedDecisionTree import train_boosted_dtc
-from train.trainSVM import train_svm
-from train.trainNeuralNetwork import train_neural_net
+from train.trainDecisionTree import train_dtc, train_dtc_loan
+from train.train_k_NearestNeighbors import train_k_NN, train_k_NN_loan
+from train.trainBoostedDecisionTree import train_boosted_dtc, train_boosted_dtc_loan
+from train.trainSVM import train_svm, train_svm_loan
+from train.trainNeuralNetwork import train_neural_net, train_neural_net_with_loan_data
 
 if __name__ == "__main__":
     print(len(sys.argv))
@@ -12,20 +12,38 @@ if __name__ == "__main__":
     else:
         data_set = sys.argv[1]
         model = sys.argv[2]
-        if model == 'kNN':
-            train_k_NN(data_set, '')
-        if model == 'Boosted':
-            train_boosted_dtc(data_set, '')
-        if model == 'DTC':
-            train_dtc(data_set, '')
-        if model == 'NeuralNet':
-            train_neural_net(data_set, '')
-        if model == 'svm':
-            train_svm(data_set, '')
-        if model == 'all':
-            train_k_NN(data_set, '')
-            train_boosted_dtc(data_set, '')
-            train_dtc(data_set, '')
-            train_neural_net(data_set, '')
-            train_svm(data_set, '')
-
+        with_plots = sys.argv[3]
+        if data_set == 'cardio':
+            if model == 'kNN':
+                train_k_NN('', with_plots)
+            if model == 'Boosted':
+                train_boosted_dtc('', with_plots)
+            if model == 'DTC':
+                train_dtc('', with_plots)
+            if model == 'NeuralNet':
+                train_neural_net('', with_plots)
+            if model == 'svm':
+                train_svm('', with_plots)
+            if model == 'all':
+                train_k_NN('', with_plots)
+                train_boosted_dtc('', with_plots)
+                train_dtc('', with_plots)
+                train_neural_net('', with_plots)
+                # train_svm('', with_plots)
+        elif data_set == 'loan':
+            if model == 'kNN':
+                train_k_NN_loan('', with_plots)
+            if model == 'Boosted':
+                train_boosted_dtc_loan('', with_plots)
+            if model == 'DTC':
+                train_dtc_loan('', with_plots)
+            if model == 'NeuralNet':
+                train_neural_net_with_loan_data('', with_plots)
+            if model == 'svm':
+                train_svm_loan('', with_plots)
+            if model == 'all':
+                train_k_NN_loan('', with_plots)
+                train_boosted_dtc_loan('', with_plots)
+                train_dtc_loan('', with_plots)
+                train_neural_net_with_loan_data('', with_plots)
+                # train_svm_loan('', with_plots)

@@ -9,8 +9,7 @@ def train_dtc(path, with_plots):
 
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    if not with_plots:
-
+    if with_plots == "False":
         print("training 1")
         model_nodes_1 = train_and_time(tree.DecisionTreeClassifier(max_depth=5), x_train, y_train)
         model_nodes_2 = train_and_time(tree.DecisionTreeClassifier(max_depth=10), x_train, y_train)
@@ -82,8 +81,7 @@ def train_dtc_loan(path, with_plots):
 
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    if not with_plots:
-
+    if with_plots == "False":
         model_nodes_1 = train_and_time(tree.DecisionTreeClassifier(max_depth=4), x_train, y_train)
         model_nodes_2 = train_and_time(tree.DecisionTreeClassifier(max_depth=8), x_train, y_train)
         model_nodes_3 = train_and_time(tree.DecisionTreeClassifier(max_depth=15), x_train, y_train)

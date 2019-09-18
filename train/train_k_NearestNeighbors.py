@@ -9,7 +9,7 @@ def train_k_NN(path, with_plots):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    if not with_plots:
+    if with_plots == "False":
         model_1 = train_and_time(KNeighborsClassifier(n_neighbors=25), x_train, y_train)
         model_2 = train_and_time(KNeighborsClassifier(n_neighbors=150), x_train, y_train)
         model_3 = train_and_time(KNeighborsClassifier(n_neighbors=225), x_train, y_train)
@@ -48,7 +48,7 @@ def train_k_NN_loan(path, with_plots):
     data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    if not with_plots:
+    if with_plots == "False":
         model_1 = train_and_time(KNeighborsClassifier(n_neighbors=5), x_train, y_train)
         model_2 = train_and_time(KNeighborsClassifier(n_neighbors=10), x_train, y_train)
         model_3 = train_and_time(KNeighborsClassifier(n_neighbors=25), x_train, y_train)
