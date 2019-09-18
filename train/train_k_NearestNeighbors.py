@@ -2,7 +2,7 @@
 from sklearn.neighbors import KNeighborsClassifier
 from utils import save_model, load_data
 from visualization_utils import multiple_learning_curves_plot
-from utils import save_figure
+from utils import save_figure, train_and_time
 
 
 def train_k_NN(path, with_plots):
@@ -10,14 +10,10 @@ def train_k_NN(path, with_plots):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
     if not with_plots:
-        print('Training 1')
-        model_1 = KNeighborsClassifier(n_neighbors=25).fit(x_train, y_train)
-        print('Training 2')
-        model_2 = KNeighborsClassifier(n_neighbors=150).fit(x_train, y_train)
-        print('Training 3')
-        model_3 = KNeighborsClassifier(n_neighbors=225).fit(x_train, y_train)
-        print('Training 4')
-        model_4 = KNeighborsClassifier(n_neighbors=300).fit(x_train, y_train)
+        model_1 = train_and_time(KNeighborsClassifier(n_neighbors=25), x_train, y_train)
+        model_2 = train_and_time(KNeighborsClassifier(n_neighbors=150), x_train, y_train)
+        model_3 = train_and_time(KNeighborsClassifier(n_neighbors=225), x_train, y_train)
+        model_4 = train_and_time(KNeighborsClassifier(n_neighbors=300), x_train, y_train)
 
         save_model(model_1, path + 'model/' + data_set, 'kNN_model_1')
         save_model(model_2, path + 'model/' + data_set, 'kNN_model_2')
@@ -53,14 +49,10 @@ def train_k_NN_loan(path, with_plots):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
     if not with_plots:
-        print('Training 1')
-        model_1 = KNeighborsClassifier(n_neighbors=5).fit(x_train, y_train)
-        print('Training 2')
-        model_2 = KNeighborsClassifier(n_neighbors=10).fit(x_train, y_train)
-        print('Training 3')
-        model_3 = KNeighborsClassifier(n_neighbors=25).fit(x_train, y_train)
-        print('Training 4')
-        model_4 = KNeighborsClassifier(n_neighbors=100).fit(x_train, y_train)
+        model_1 = train_and_time(KNeighborsClassifier(n_neighbors=5), x_train, y_train)
+        model_2 = train_and_time(KNeighborsClassifier(n_neighbors=10), x_train, y_train)
+        model_3 = train_and_time(KNeighborsClassifier(n_neighbors=25), x_train, y_train)
+        model_4 = train_and_time(KNeighborsClassifier(n_neighbors=100), x_train, y_train)
 
         save_model(model_1, path + 'model/' + data_set, 'kNN_model_1')
         save_model(model_2, path + 'model/' + data_set, 'kNN_model_2')
@@ -93,4 +85,4 @@ def train_k_NN_loan(path, with_plots):
 
 if __name__ == "__main__":
     # train_k_NN('../', False)
-    train_k_NN_loan('../', True)
+    train_k_NN_loan('../', False)

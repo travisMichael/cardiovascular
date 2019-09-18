@@ -1,4 +1,4 @@
-from visualization_utils import multiple_learning_curves_plot, multiple_precision_recall_curves
+from visualization_utils import multiple_learning_curves_plot
 from sklearn import tree
 from utils import save_model, save_figure, load_data, train_and_time
 
