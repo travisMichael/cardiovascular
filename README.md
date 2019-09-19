@@ -30,6 +30,8 @@ python train.py cardio all False
 
 python train.py loan all False
 
+The training process will take some time to run, especially while training SVM's. Training the SVM's takes so that
+that they were commented out. If you would like to train them, please remove the comments in train.py.
 If you would like to re-generate the learning curve plots for each model, run the following commands:
 
 python train.py cardio all True
@@ -46,4 +48,5 @@ python test.py cardio all
 python test.py loan all
 
 
-All plots are saved under the plot directory.
+Since the SVM models are not trained by default for the financial loan problem, they are also commented out in
+testModels.py. All plots are saved under the plot directory.
