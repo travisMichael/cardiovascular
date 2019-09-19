@@ -1,6 +1,5 @@
 # https://scikit-learn.org/stable/modules/svm.html
 from sklearn import svm
-from sklearn.neural_network import MLPClassifier
 from utils import save_model, load_data, train_and_time
 
 
@@ -16,15 +15,7 @@ def train_svm(path, with_plots):
         save_model(model_1, path + 'model/' + data_set, 'svm_model_1')
         save_model(model_2, path + 'model/' + data_set, 'svm_model_2')
     else:
-        print('Training Support Vector Machine...')
-        model = svm.SVC(kernel='linear', cache_size=400)
-        # model = svm.SVC(kernel='rbf', gamma=0.001, cache_size=400)
-
-        model.fit(x_train, y_train)
-        # result = model.predict(x_test)
-
-        save_model(model, path + 'model/' + data_set, 'best_SVN_model')
-        print("done")
+        print('No learning curves for SVM...')
 
 
 def train_svm_loan(path, with_plots):
@@ -40,15 +31,7 @@ def train_svm_loan(path, with_plots):
         # save_model(model_2, path + 'model/' + data_set, 'svm_model_2')
 
     else:
-        print('Training Support Vector Machine...')
-        model = svm.SVC(kernel='linear', cache_size=400)
-        # model = svm.SVC(kernel='rbf', gamma=0.001, cache_size=400)
-
-        model.fit(x_train, y_train)
-        # result = model.predict(x_test)
-
-        save_model(model, path + 'model/' + data_set, 'best_SVN_model')
-        print("done")
+        print('No learning curves for SVM...')
 
 
 if __name__ == "__main__":
