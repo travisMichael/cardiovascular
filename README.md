@@ -15,6 +15,10 @@ Before running any of the programs in this project, download the datasets from t
 are owned by Kaggle, so you must be a Kaggle member to download them. Signing up for Kaggle is free. Make sure to 
 place both datasets inside the parent directory of this project.
 
+https://www.kaggle.com/wendykan/lending-club-loan-data
+
+https://www.kaggle.com/sulianova/cardiovascular-disease-dataset
+
 Once both datasets have been placed inside the project, then the pre-processing programs can be run for each dataset. 
 To run the pre-processing programs, run the following commands:
 
