@@ -13,6 +13,7 @@ def normalize_gender_attribute(x):
 
 def pre_process_cardio_data(path):
     df = pd.read_csv(path + "cardio_train.csv", delimiter=";")
+    print(df.shape)
 
     max_stats = df.max()
     # min_stats = df.min()
@@ -30,6 +31,10 @@ def pre_process_cardio_data(path):
 
     y = np.array(df.iloc[:,12])
     x = df.iloc[:,1:11]
+
+    negative_cases = len(df[(df.cardio == 0)])
+    positive_cases = len(df[(df.cardio == 1)])
+    print('Cases', positive_cases, negative_cases)
 
     x_train = x.iloc[0:56000, :].values
     y_train = y[0:56000]

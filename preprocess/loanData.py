@@ -48,6 +48,11 @@ def pre_process_loan_data(path):
     df = df.rename(columns= {'emp_length_< 1 year': 'emp_length_lt_1 year',
                              'emp_length_n/a': 'emp_length_na'})
 
+
+    negative_cases = len(df[(df.good_loan == 0)])
+    positive_cases = len(df[(df.good_loan == 1)])
+    print('Cases', positive_cases, negative_cases)
+
     y = df['good_loan']
     X = df.ix[:, df.columns != 'good_loan']
 
