@@ -8,14 +8,14 @@ def test_svm(X, y, path):
 
     print("Predicting 1")
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/svm_model_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/svm_model_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
     print("Predicting 2")
-    dtc = pickle.load(open('../model/' + data_set + '/svm_model_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/svm_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
@@ -42,14 +42,14 @@ def test_svm_loan(X, y, path):
 
     print("Predicting 1")
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/f_svm_model_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/f_svm_model_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
     print("Predicting 2")
-    dtc = pickle.load(open('../model/' + data_set + '/f_svm_model_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/f_svm_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)

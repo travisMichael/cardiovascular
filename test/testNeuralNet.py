@@ -6,25 +6,25 @@ from utils import save_figure, calculate_f1_score
 def test_neural_net_cardio(X, y, path):
     data_set = 'cardio'
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_3', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_4', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
@@ -49,25 +49,25 @@ def test_neural_net_cardio(X, y, path):
 def test_neural_net_loan(X, y, path):
     data_set = 'loan'
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_3', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/neural_net_model_4', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/neural_net_model_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)

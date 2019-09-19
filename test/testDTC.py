@@ -6,31 +6,31 @@ from utils import save_figure, calculate_f1_score
 def test_decision_tree(X, y, path):
     data_set = 'cardio'
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_nodes_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_nodes_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_3', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_nodes_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_nodes_4', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_nodes_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
@@ -55,31 +55,31 @@ def test_decision_tree_max_leaf(X, y, path):
     data_set = 'cardio'
     probabilit_list = []
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_3', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_4', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
@@ -102,31 +102,31 @@ def test_decision_tree_max_leaf(X, y, path):
 def test_decision_tree_loan(X, y, path):
     data_set = 'loan'
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_depth_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_depth_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_depth_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_depth_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_depth_3', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_depth_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_depth_4', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_depth_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
@@ -150,31 +150,31 @@ def test_decision_tree_loan(X, y, path):
 def test_decision_tree_with_leaf_nodes_loan(X, y, path):
     data_set = 'loan'
     probabilit_list = []
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_1', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_1', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_2', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_2', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_3', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_3', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_model_leaf_nodes_4', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_model_leaf_nodes_4', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
     calculate_f1_score(dtc, X, y)
 
-    dtc = pickle.load(open('../model/' + data_set + '/dtc_none', 'rb'))
+    dtc = pickle.load(open(path + 'model/' + data_set + '/dtc_none', 'rb'))
     probs = dtc.predict_proba(X)
     probs = probs[:, 1]
     probabilit_list.append(probs)
