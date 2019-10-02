@@ -173,6 +173,7 @@ def random_hill_climb(problem, max_attempts=10, max_iters=np.inf, restarts=0,
 
     for _ in range(restarts + 1):
         # Initialize optimization problem and attempts counter
+        print("restarting...")
         if init_state is None:
             problem.reset()
         else:
@@ -187,6 +188,8 @@ def random_hill_climb(problem, max_attempts=10, max_iters=np.inf, restarts=0,
             # Find random neighbor and evaluate fitness
             next_state = problem.random_neighbor()
             next_fitness = problem.eval_fitness(next_state)
+            if iters % 100 == 0:
+                print(iters, next_fitness)
 
             # If best neighbor is an improvement,
             # move to that state and reset attempts counter
@@ -199,6 +202,7 @@ def random_hill_climb(problem, max_attempts=10, max_iters=np.inf, restarts=0,
 
             if curve:
                 fitness_curve.append(problem.get_fitness())
+        print("terminated", attempts, iters)
 
         # Update best state and best fitness
         if problem.get_fitness() > best_fitness:
@@ -297,7 +301,8 @@ def simulated_annealing(problem, schedule=GeomDecay(), max_attempts=10,
             # Calculate delta E and change prob
             delta_e = next_fitness - problem.get_fitness()
             prob = np.exp(delta_e/temp)
-
+            if iters % 100 == 0:
+                print(temp, iters, next_fitness, prob, delta_e)
             # If best neighbor is an improvement or random value is less
             # than prob, move to that state and reset attempts counter
             if (delta_e > 0) or (np.random.uniform() < prob):
@@ -310,6 +315,7 @@ def simulated_annealing(problem, schedule=GeomDecay(), max_attempts=10,
         if curve:
             fitness_curve.append(problem.get_fitness())
 
+    print(iters, attempts)
     best_fitness = problem.get_maximize()*problem.get_fitness()
     best_state = problem.get_state()
 
@@ -419,6 +425,8 @@ def genetic_alg(problem, pop_size=200, mutation_prob=0.1, max_attempts=10,
         next_state = problem.best_child()
         next_fitness = problem.eval_fitness(next_state)
 
+        if iters % 2 == 0:
+            print(iters, next_fitness)
         # If best child is an improvement,
         # move to that state and reset attempts counter
         if next_fitness > problem.get_fitness():
@@ -430,6 +438,8 @@ def genetic_alg(problem, pop_size=200, mutation_prob=0.1, max_attempts=10,
 
         if curve:
             fitness_curve.append(problem.get_fitness())
+
+    print("terminated", attempts, iters)
 
     best_fitness = problem.get_maximize()*problem.get_fitness()
     best_state = problem.get_state()
