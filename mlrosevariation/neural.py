@@ -130,7 +130,7 @@ def gradient_descent(problem, max_attempts=10, max_iters=np.inf,
 
     best_fitness = problem.get_maximize()*problem.get_fitness()
     best_state = problem.get_state()
-
+    print(best_fitness)
     while (attempts < max_attempts) and (iters < max_iters):
         iters += 1
 
@@ -139,6 +139,9 @@ def gradient_descent(problem, max_attempts=10, max_iters=np.inf,
 
         next_state = problem.update_state(updates)
         next_fitness = problem.eval_fitness(next_state)
+
+        if iters % 10 == 0:
+            print(iters, next_fitness)
 
         if next_fitness > problem.get_fitness():
             attempts = 0
@@ -248,6 +251,7 @@ class NetworkWeights:
 
         self.nodes = nodes
 
+
     def evaluate(self, state):
         """Evaluate the fitness of a state.
         Parameters
@@ -286,6 +290,7 @@ class NetworkWeights:
                 self.y_pred = self.output_activation(outputs)
 
         # Evaluate loss function
+        # make changes here
         fitness = self.loss(self.y_true, self.y_pred)
 
         return fitness
@@ -518,7 +523,7 @@ class BaseNeuralNetwork(six.with_metaclass(ABCMeta, BaseEstimator)):
                                           self.early_stopping else
                                           self.max_iters,
                                           max_iters=self.max_iters,
-                                          restarts=0, init_state=init_weights,
+                                          restarts=4, init_state=init_weights,
                                           curve=self.curve)
                 else:
                     current_weights, current_loss = random_hill_climb(
@@ -606,6 +611,44 @@ class BaseNeuralNetwork(six.with_metaclass(ABCMeta, BaseEstimator)):
             self.fitness_curve = fitness_curve
 
         return self
+
+    def predict_proba(self, X):
+        """Use model to predict data labels for given feature array.
+        Parameters
+        ----------
+        X: array
+            Numpy array containing feature dataset with each row
+            representing a single observation.
+        Returns
+        -------
+        y_pred: array
+            Numpy array containing predicted data labels.
+        """
+        if not np.shape(X)[1] == (self.node_list[0] - self.bias):
+            raise Exception("""The number of columns in X must equal %d"""
+                            % ((self.node_list[0] - self.bias),))
+
+        weights = unflatten_weights(self.fitted_weights, self.node_list)
+
+        # Add bias column to inputs matrix, if required
+        if self.bias:
+            ones = np.ones([np.shape(X)[0], 1])
+            inputs = np.hstack((X, ones))
+
+        else:
+            inputs = X
+
+        # Pass data through network
+        for i in range(len(weights)):
+            # Multiple inputs by weights
+            outputs = np.dot(inputs, weights[i])
+
+            # Transform outputs to get inputs for next layer (or final preds)
+            if i < len(weights) - 1:
+                inputs = self.activation_dict[self.activation](outputs)
+            else:
+                y_pred = self.output_activation(outputs)
+        return y_pred
 
     def predict(self, X):
         """Use model to predict data labels for given feature array.
