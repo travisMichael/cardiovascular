@@ -5,4 +5,5 @@ test2.py
 **/.idea
 **/data/**
 **/model/**
-**/plot/**
+**/plot/cardio/**
+**/plot/loan/**
