@@ -425,8 +425,11 @@ def genetic_alg(problem, pop_size=200, mutation_prob=0.1, max_attempts=10,
         next_state = problem.best_child()
         next_fitness = problem.eval_fitness(next_state)
 
-        if iters % 2 == 0:
-            print(iters, next_fitness)
+        print(iters, next_fitness, problem.get_fitness())
+
+        if curve:
+            fitness_curve.append(problem.get_fitness())
+
         # If best child is an improvement,
         # move to that state and reset attempts counter
         if next_fitness > problem.get_fitness():
@@ -436,8 +439,8 @@ def genetic_alg(problem, pop_size=200, mutation_prob=0.1, max_attempts=10,
         else:
             attempts += 1
 
-        if curve:
-            fitness_curve.append(problem.get_fitness())
+        # if curve:
+        #     fitness_curve.append(problem.get_fitness())
 
     print("terminated", attempts, iters)
 
