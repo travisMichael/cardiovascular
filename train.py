@@ -4,11 +4,14 @@ from train.train_k_NearestNeighbors import train_k_NN, train_k_NN_loan
 from train.trainBoostedDecisionTree import train_boosted_dtc, train_boosted_dtc_loan
 from train.trainSVM import train_svm, train_svm_loan
 from train.trainNeuralNetwork import train_neural_net, train_neural_net_with_loan_data
+from train.trainWithRandomizedOptimization import train_neural_net_with_loan_data_ro
 
 if __name__ == "__main__":
     print(len(sys.argv))
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         print("Please specify filename, data set, and model")
+    elif len(sys.argv) == 2:
+        train_neural_net_with_loan_data_ro('', True)
     else:
         data_set = sys.argv[1]
         model = sys.argv[2]

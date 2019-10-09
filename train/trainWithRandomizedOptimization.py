@@ -10,12 +10,12 @@ import time
 # genetic_alg
 
 
-def train_neural_net_with_loan_data(path, with_plots):
+def train_neural_net_with_loan_data_ro(path, with_plots):
     data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     X_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    if with_plots == "False":
+    if with_plots:
 
         start_time = time.time()
         nn_ga = neural.NeuralNetwork(hidden_nodes = [40], activation = 'sigmoid',
@@ -122,4 +122,4 @@ def train_neural_net_with_loan_data(path, with_plots):
 
 if __name__ == "__main__":
     # train_neural_net('../', False)
-    train_neural_net_with_loan_data('../', "False")
+    train_neural_net_with_loan_data_ro('../', True)

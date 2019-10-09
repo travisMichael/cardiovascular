@@ -77,5 +77,5 @@ def plot_model(path, algorithm):
 
 
 if __name__ == "__main__":
-    plot_model('../', 'sgd')
+    plot_model('../', 'all')
 
